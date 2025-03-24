@@ -1,11 +1,10 @@
 <mat-tab-group>
     <mat-tab>
-        <ng-template mat-tab-label>
-            <span class="tab-content">
-              <mat-icon>movie</mat-icon>
-              <span>peliculas</span>
-            </span>
-          </ng-template>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">movie</mat-icon>
+        peliculas
+      </ng-template>
+      <app-movies></app-movies>
     </mat-tab>
   
     <mat-tab>
@@ -13,7 +12,7 @@
         <mat-icon class="example-tab-icon">groups</mat-icon>
         usuarios
       </ng-template>
-      Content 2
+      <app-clients></app-clients>
     </mat-tab>
 
 </mat-tab-group>
