@@ -1,18 +1,44 @@
-<mat-tab-group>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-icon class="example-tab-icon">movie</mat-icon>
-        peliculas
-      </ng-template>
-      <app-movies></app-movies>
-    </mat-tab>
+<div class="admin-container">
   
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-icon class="example-tab-icon">groups</mat-icon>
-        usuarios
-      </ng-template>
-      <app-clients></app-clients>
-    </mat-tab>
+  <!-- Encabezado -->
+  <header class="admin-header">
+    <h1>Panel de Administración</h1>
+    <button mat-button color="danger" (click)="logout()">❌ Cerrar Sesion</button>
+  </header>
 
-</mat-tab-group>
+  <div class="admin-content">
+    <!-- Contenido Principal -->
+    <main class="admin-main">
+      <mat-tab-group class="custom-tab-group">
+        
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="custom-tab-icon">movie</mat-icon>
+            <span>Películas</span>
+          </ng-template>
+          <div class="tab-content">
+            <app-movies></app-movies>
+          </div>
+        </mat-tab>
+      
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="custom-tab-icon">groups</mat-icon>
+            <span>Usuarios</span>
+          </ng-template>
+          <div class="tab-content">
+            <app-clients></app-clients>
+          </div>
+        </mat-tab>
+
+      </mat-tab-group>
+    </main>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="admin-footer">
+    <p>🎥 VortexBird Admin | &copy; 2025 - Todos los derechos reservados</p>
+  </footer>
+
+</div>

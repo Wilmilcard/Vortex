@@ -1,0 +1,85 @@
+/* Contenedor principal */
+.admin-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: #f5f5f5;
+  }
+  
+  /* Encabezado */
+  .admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #3f51b5;
+    color: white;
+    padding: 15px 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .admin-header h1 {
+    margin: 0;
+  }
+  
+  .logout-btn {
+    background: #d32f2f;
+    color: white;
+  }
+  
+  /* Contenido */
+  .admin-content {
+    display: flex;
+    flex: 1;
+  }
+  
+  /* Sidebar */
+  .admin-sidebar {
+    width: 250px;
+    background: #303f9f;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sidebar-btn {
+    width: 100%;
+    color: white;
+    text-align: left;
+  }
+  
+  .sidebar-btn mat-icon {
+    margin-right: 10px;
+  }
+  
+  /* Contenido principal */
+  .admin-main {
+    flex: 1;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+  }
+  
+  /* Tabs */
+  .custom-tab-group {
+    background: #f8f9fa;
+    border-radius: 10px;
+  }
+  
+  .custom-tab-icon {
+    font-size: 24px;
+    margin-right: 5px;
+  }
+  
+  /* Footer */
+  .admin-footer {
+    background: #3f51b5;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
+  }
+  

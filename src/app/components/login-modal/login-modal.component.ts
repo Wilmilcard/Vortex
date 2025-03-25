@@ -14,11 +14,12 @@ import {MatButtonModule} from '@angular/material/button';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PayService } from '../../services/pay/pay.service';
 import { DialogModalComponent } from '../dialog-modal/dialog-modal.component';
-
+import { MatDialogRef } from '@angular/material/dialog';
 
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { UserLogin } from '../../models/login.interface';
 import { Pay } from '../../models/pay.interface';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -43,6 +44,7 @@ export class LoginModalComponent {
   username: string = '';
   password: string = '';
   readonly dialog = inject(MatDialog);
+  _isLogin: boolean = false;
 
   login_request: UserLogin = {
     username: '',
@@ -56,17 +58,19 @@ export class LoginModalComponent {
     metodoPago: ''
   }
 
-  constructor(private payService: PayService, @Inject(DOCUMENT) private document: Document, @Inject(MAT_DIALOG_DATA) public data: 
+  constructor(private dialogRef: MatDialogRef<LoginModalComponent>,private router: Router,private payService: PayService, @Inject(DOCUMENT) private document: Document, @Inject(MAT_DIALOG_DATA) public data: 
   { 
     cantidad: number,
     total : number,
     peliculaId : number,
-    tipoPago: string
+    tipoPago: string,
+    isLogin: boolean
   }) {
     this.pay_request.cantidad = data.cantidad;
     this.pay_request.total = data.total;
     this.pay_request.peliculaId = data.peliculaId;
     this.pay_request.metodoPago = data.tipoPago;
+    this._isLogin = data.isLogin
   }
 
   ngOnInit() {
@@ -91,7 +95,14 @@ export class LoginModalComponent {
           });   
         }else{
           localStorage.setItem('token', data.data.token);
-          this.pago();
+          if(!this._isLogin){
+            if (confirm("¿Estás seguro de continuar?")) {
+              this.pago();
+            }
+          }
+          else{
+            this.dialogRef.close();
+          }
         }
       },
       error: (err) => {
@@ -125,7 +136,10 @@ export class LoginModalComponent {
   }
 
   close(){
-    //localStorage.removeItem('token');
+    if(this._isLogin){
+      localStorage.removeItem('token');
+      this.router.navigate(['']);
+    }
   }
 
   

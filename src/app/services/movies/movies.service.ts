@@ -24,6 +24,10 @@ export class MoviesService extends servicesTools {
   getAllActive(): Observable<GenericResponse> {
     return this.http.get<GenericResponse>(`${environment.URL_API}/Peliculas/GetAllActive`);
   }
+
+  getAllAuth(): Observable<GenericResponse> {
+    return this.http.get<GenericResponse>(`${environment.URL_API}/Peliculas/GetAllAuth`,this.getHttpOptions());
+  }
   
   getFilters(request: MoviesFilter): Observable<GenericResponse> {
     return this.http

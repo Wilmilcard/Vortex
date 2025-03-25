@@ -103,7 +103,8 @@ export class PayComponent {
           cantidad: this.cantidad,
           total : this.precio,
           peliculaId: this.movie_filter.peliculaId,
-          tipoPago : this.tipoPago
+          tipoPago : this.tipoPago,
+          isLogin : false
         }
       });
     }
@@ -111,7 +112,7 @@ export class PayComponent {
 
   cancelarCompra() {
     alert('Compra cancelada');
-    this.router.navigate(['/home']); // Cambia '/home' por la ruta deseada
+    this.router.navigate(['/home']);
   }
 
   calcularTotal() {

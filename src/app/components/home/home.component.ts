@@ -12,7 +12,7 @@ import { MoviesService } from '../../services/movies/movies.service';
 import { MoviesFilter } from '../../models/movies-filter.interface';
 import { DialogModalComponent } from '../dialog-modal/dialog-modal.component';
 import {MatSelectModule} from '@angular/material/select';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 interface Cine {
   value: number;
@@ -40,7 +40,6 @@ export class HomeComponent {
   movies: any[] = [];
   movieId: number | null = null;
   
-
   readonly dialog = inject(MatDialog);
 
   movie_filter: MoviesFilter = {
@@ -56,13 +55,17 @@ export class HomeComponent {
     {value: 3, viewValue: 'Royal Films'},
   ];
 
-  constructor(private movieService: MoviesService, @Inject(DOCUMENT) private document: Document) {}
+  constructor(private movieService: MoviesService, @Inject(DOCUMENT) private document: Document, private router: Router) {}
 
   ngOnInit(): void {
     this.movieService.getAllActive().subscribe((response) => {
       this.movies = response.data;
       console.log(this.movies)
     });
+  }
+
+  login() {
+    this.router.navigate(['/administration']);
   }
 
   getMovieFilter(): void {
