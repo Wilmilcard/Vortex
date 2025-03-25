@@ -59,7 +59,7 @@ export class HomeComponent {
   constructor(private movieService: MoviesService, @Inject(DOCUMENT) private document: Document) {}
 
   ngOnInit(): void {
-    this.movieService.getAll().subscribe((response) => {
+    this.movieService.getAllActive().subscribe((response) => {
       this.movies = response.data;
       console.log(this.movies)
     });
@@ -88,7 +88,7 @@ export class HomeComponent {
   }
 
   getAllMovies(): void {
-    this.movieService.getAll().subscribe(data => {
+    this.movieService.getAllActive().subscribe(data => {
       this.movies = data.data;
     });
   }

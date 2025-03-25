@@ -125,7 +125,7 @@ export class LoginModalComponent {
   }
 
   close(){
-    localStorage.removeItem('token');
+    //localStorage.removeItem('token');
   }
 
   

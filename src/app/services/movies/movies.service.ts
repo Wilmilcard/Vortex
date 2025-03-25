@@ -20,6 +20,10 @@ export class MoviesService extends servicesTools {
   getAll(): Observable<GenericResponse> {
     return this.http.get<GenericResponse>(`${environment.URL_API}/Peliculas/GetAll`);
   }
+
+  getAllActive(): Observable<GenericResponse> {
+    return this.http.get<GenericResponse>(`${environment.URL_API}/Peliculas/GetAllActive`);
+  }
   
   getFilters(request: MoviesFilter): Observable<GenericResponse> {
     return this.http
@@ -62,7 +66,7 @@ export class MoviesService extends servicesTools {
 
   changeState(request: ChangeStateRequest): Observable<GenericResponse> {
     return this.http
-      .put<GenericResponse>(`${environment.URL_API}/Peliculas/ChangeState`, request)
+      .put<GenericResponse>(`${environment.URL_API}/Peliculas/ChangeState`, request, this.getHttpOptions())
       .pipe(
         map((res: GenericResponse) => {
           return res;
