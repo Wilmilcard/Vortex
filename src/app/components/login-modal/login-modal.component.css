@@ -1,0 +1,25 @@
+.login-container {
+    text-align: center;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+  }
+  
+  .login-title {
+    margin-bottom: 20px;
+    color: #1768c4;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .full-width {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  .login-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  

@@ -12,6 +12,7 @@ import { MoviesService } from '../../services/movies/movies.service';
 import { MoviesFilter } from '../../models/movies-filter.interface';
 import { DialogModalComponent } from '../dialog-modal/dialog-modal.component';
 import {MatSelectModule} from '@angular/material/select';
+import { RouterModule } from '@angular/router';
 
 interface Cine {
   value: number;
@@ -23,7 +24,8 @@ interface Cine {
   standalone: true,
   imports: [
     CommonModule, 
-    FormsModule, 
+    FormsModule,
+    RouterModule,
     MatButtonModule, 
     MatInputModule, 
     MatFormFieldModule, 
@@ -43,11 +45,7 @@ export class HomeComponent {
 
   movie_filter: MoviesFilter = {
     cineId: null,
-    direccionCine: null,
     titulo: null,
-    descripcion: null,
-    genero: null,
-    director: null,
     fechaFuncionInicio: null,
     fechaFuncionFin: null
   };
@@ -63,33 +61,35 @@ export class HomeComponent {
   ngOnInit(): void {
     this.movieService.getAll().subscribe((response) => {
       this.movies = response.data;
-      console.log(this.movies);
+      console.log(this.movies)
     });
   }
 
   getMovieFilter(): void {
-    if (this.movieId) {
-      this.movieService.getFilters(this.movie_filter).subscribe({
-        next: (data) => {
-          console.log(data);
-          //this.movies = [data.data];
-        },
-        error: (err) => {
+    this.movieService.getFilters(this.movie_filter).subscribe({
+      next: (data) => {
+        if(data.data == null){
           this.dialog.open(DialogModalComponent, { 
-            data: { message: JSON.stringify(err.error) } // Convierte a string
+            data: { message: "No hay coincidencias de busqueda", titulo: "Error" }
           });
-          this.movies = [];
-          this.movie_filter = {};
+        }else{
+          console.log(data);
+          this.movies = [data.data];
         }
-      });
-    } else {
-      this.getAllMovies();
-    }
+      },
+      error: (err) => {
+        this.dialog.open(DialogModalComponent, { 
+          data: { message: JSON.stringify(err.error), titulo: "Error" }
+        });
+        this.movies = [];
+        this.movie_filter = {};
+      }
+    });
   }
 
   getAllMovies(): void {
     this.movieService.getAll().subscribe(data => {
-      //this.movies = data;
+      this.movies = data.data;
     });
   }
 

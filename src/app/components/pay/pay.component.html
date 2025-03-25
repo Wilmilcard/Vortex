@@ -1,1 +1,59 @@
-<p>pay works!</p>
+<div class="pay-wrapper">
+    <mat-card class="pay-container">
+      <mat-toolbar color="primary" class="header">
+        <span>🛒 Pago de Tickets</span>
+      </mat-toolbar>
+  
+      <mat-card-content>
+        <h2 class="movie-title">{{ titulo }}</h2>
+        <p><strong>Función:</strong> {{ funcion | date:'dd/MM/yyyy hh:mm a' }}</p>
+        
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Cantidad de Tickets</mat-label>
+            <mat-select [(ngModel)]="cantidad" name="cantidad" required (selectionChange)="calcularTotal()">
+              <mat-option *ngFor="let num of [1,2,3,4,5,6,7,8,9,10]" [value]="num">
+                {{ num }}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <p><strong>Total a pagar:</strong> ${{ total | number:'1.2-2' }}</p>
+  
+        <form>
+  
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Tipo de pago</mat-label>
+            <mat-select [(ngModel)]="tipoPago" name="tipoPago" required>
+              <mat-option *ngFor="let tip of ['Tarjeta', 'Nequi', 'PSE', 'Efectivo']" [value]="tip">
+                {{ tip }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Nombre en la Tarjeta</mat-label>
+            <input matInput [(ngModel)]="nombre" name="nombre" required />
+          </mat-form-field>
+  
+          <div class="row">
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Expiración (MM/AA)</mat-label>
+              <input matInput [(ngModel)]="expiracion" name="expiracion" maxlength="5" required />
+            </mat-form-field>
+  
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>CVV</mat-label>
+              <input matInput type="password" [(ngModel)]="cvv" name="cvv" maxlength="4" required />
+            </mat-form-field>
+          </div>
+  
+          <mat-card-actions class="actions">
+            <button mat-raised-button class="cancel-btn" (click)="cancelarCompra()">Cancelar</button>
+            <button mat-raised-button class="pay-btn" (click)="procesarPago()">Pagar</button>
+          </mat-card-actions>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  

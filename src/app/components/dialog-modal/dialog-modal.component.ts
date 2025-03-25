@@ -17,7 +17,8 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrl: './dialog-modal.component.css'
 })
 export class DialogModalComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { message: string }) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { message: string, titulo: string }) {
     console.log(data.message)
+    console.log(data.titulo)
   }
 }

@@ -1,54 +1,62 @@
 <div class="container">
-    <h2 class="section-title">🎬 Lista de Películas</h2>
+  <h2 class="section-title">🎬 Lista de Películas</h2>
 
-    <div class="card">
-        <h3 class="filter-title">Filtrar Películas</h3>
-        <div class="filter-grid">
-          
-            <mat-form-field appearance="outline">
-              <mat-label>Cines</mat-label>
-              <mat-select>
-                @for (cinema of cinemas; track cinema) {
-                  <mat-option [value]="cinema.value">{{cinema.viewValue}}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-      
+  <div class="card">
+      <h3 class="filter-title">Filtrar Películas</h3>
+      <div class="filter-grid">
+        
           <mat-form-field appearance="outline">
-            <mat-label>Título</mat-label>
-            <input matInput [(ngModel)]="movie_filter.titulo">
+            <mat-label>Cines</mat-label>
+            <mat-select [(ngModel)]="movie_filter.cineId">
+              @for (cinema of cinemas; track cinema) {
+                <mat-option [value]="cinema.value">{{ cinema.viewValue }}</mat-option>
+              }
+            </mat-select>
           </mat-form-field>
-      
-
-          <mat-form-field appearance="outline">
-            <mat-label>Fecha desde</mat-label>
-            <input matInput type="date" [(ngModel)]="movie_filter.fechaFuncionInicio">
-          </mat-form-field>
-      
-          <mat-form-field appearance="outline">
-            <mat-label>Fecha hasta</mat-label>
-            <input matInput type="date" [(ngModel)]="movie_filter.fechaFuncionFin">
-          </mat-form-field>
-      
-        </div>
-      
-        <button mat-button color="accent" (click)="getMovieFilter()">🔍 Buscar</button>
+    
+        <mat-form-field appearance="outline">
+          <mat-label>Título</mat-label>
+          <input matInput [(ngModel)]="movie_filter.titulo">
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha desde</mat-label>
+          <input matInput type="date" [(ngModel)]="movie_filter.fechaFuncionInicio">
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha hasta</mat-label>
+          <input matInput type="date" [(ngModel)]="movie_filter.fechaFuncionFin">
+        </mat-form-field>
+    
       </div>
+    
+      <button mat-button color="accent" (click)="getMovieFilter()">🔍 Buscar</button>
+  </div>
 
-    <div class="grid">
+  <div class="grid">
       <mat-card *ngFor="let movie of movies" class="product-card">
         <mat-card-header>
           <mat-card-title class="custom-title">{{ movie.titulo }}</mat-card-title>
           <mat-card-subtitle>Categoria: {{ movie.genero }}</mat-card-subtitle>
         </mat-card-header>
-
+    
         <img mat-card-image [src]="movie.poster" alt="Product Image" (error)="onImageError($event)">
-
+    
         <mat-card-content>
           <p><strong>Duración:</strong> {{ movie.duracion }}</p>
           <p><strong>Estreno:</strong> {{ movie.fechaEstreno | date:'dd/MM/yyyy' }}</p>
           <p><strong>Descripción:</strong> {{ movie.descripcion }}</p>
         </mat-card-content> 
+    
+        <mat-card-actions align="end">
+          <a mat-button color="primary" [routerLink]="['/pay', movie.peliculaId]">Comprar Tickets</a>
+        </mat-card-actions>
       </mat-card>
-    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+      <p>🎥 VortexBird - Tu mejor experiencia en el cine | &copy; 2025</p>
+  </footer>
 </div>
